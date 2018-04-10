@@ -35,6 +35,9 @@ linux：yum或源码安装
 		git rm 删除文件，删错git checkout -- 文件名  返回的是最新版本，丢失最新修改
 
 四、远程仓库：
+	添加
 	git remote add origin（远程库名） git@github.com:penbaben（github用户名）/pythonnode.git（仓库名）
 	github上设置ssh key  生成本机key  ssh-keygen -t rsa
 	git push -u origin master
+	克隆
+	git clone https://github.com/penbaben/pythonnode.git
