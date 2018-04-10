@@ -41,3 +41,11 @@ linux：yum或源码安装
 	git push -u origin master
 	克隆
 	git clone https://github.com/penbaben/pythonnode.git
+	
+五、分支管理
+	1、创建分支：
+		git checkout -b dev 创建分支dev 
+		git branch 查看当前分支
+		分支完成工作后 切换回master  git checkout master
+		然后把dev合并到master： git merge dev
+		删除dev ：git branch -d dev
