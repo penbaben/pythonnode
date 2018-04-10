@@ -66,6 +66,29 @@ linux：yum或源码安装
 		git stash list查看stash内容
 		如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
 	5、多人协作：
-		
-	
+		git checkout -b dev  penbaben/dev
+	工作模式：
+		1.首先，可以试图用git push origin branch-name推送自己的修改；
+		2.如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+		3.如果合并有冲突，则解决冲突，并在本地提交；
+		4.没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
+		如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有
+			创建，用命令git branch --set-upstream branch-name origin/branch-name。
+六、标签
+	1、打标签
+		•命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
+		•git tag -a <tagname> -m "blablabla..."可以指定标签信息；
+		•git tag -s <tagname> -m "blablabla..."可以用PGP签名标签；
+		•命令git tag可以查看所有标签。
+	2、标签操作
+		•命令git push origin <tagname>可以推送一个本地标签；
+		•命令git push origin --tags可以推送全部未推送过的本地标签；
+		•命令git tag -d <tagname>可以删除一个本地标签；
+		•命令git push origin :refs/tags/<tagname>可以删除一个远程标签。
+
+
+
+
+
+
 		
