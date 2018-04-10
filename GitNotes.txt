@@ -1,0 +1,26 @@
+git 学习笔记
+
+一、git安装
+windows：下载软件--》出现窗口pc MINGW64安装成功  
+		git config --global user.name "YOUR NAME"
+		git config --global user.mail "your email"
+		其他炒作参见linux常用命令
+linux：yum或源码安装
+
+二、git创建版本库
+	创建一个空目录
+	进入目录 git init生成.git目录
+	目录下建立文件
+	第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区；
+		git add 文件名
+	第二步是用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支。
+		git commit -m “修改说明”
+	
+三、版本控制：
+	1、版本回退：
+	git log --pretty=oneline查看修改commit id
+	git reset --hard HEAD 回退上一版本
+	git reset --hard 【commit id】回退制定版本
+	git relog查看最新版id
+	
+	
