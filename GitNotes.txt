@@ -18,9 +18,17 @@ linux：yum或源码安装
 	
 三、版本控制：
 	1、版本回退：
-	git log --pretty=oneline查看修改commit id
-	git reset --hard HEAD 回退上一版本
-	git reset --hard 【commit id】回退制定版本
-	git relog查看最新版id
-	
-	
+		git log --pretty=oneline查看修改commit id
+		git reset --hard HEAD 回退上一版本
+		git reset --hard 【commit id】回退制定版本
+		it relog查看最新版id
+		git status查看状态：是否有文件没有commit及修改状态
+	2、管理修改：
+		git diff HEAD -- 文件名 命令可以查看工作区和版本库里面最新版本的区别
+		每次修改，如果不add到暂存区，那就不会加入到commit中
+	3、撤销修改
+		命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+		一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+		一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+		总之，就是让这个文件回到最近一次git commit或git add时的状态。
+
