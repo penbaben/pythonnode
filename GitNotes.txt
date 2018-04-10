@@ -33,3 +33,8 @@ linux：yum或源码安装
 		场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库
 	4、删除文件
 		git rm 删除文件，删错git checkout -- 文件名  返回的是最新版本，丢失最新修改
+
+四、远程仓库：
+	git remote add origin（远程库名） git@github.com:penbaben（github用户名）/pythonnode.git（仓库名）
+	github上设置ssh key  生成本机key  ssh-keygen -t rsa
+	git push -u origin master
