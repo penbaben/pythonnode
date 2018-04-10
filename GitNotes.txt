@@ -49,3 +49,23 @@ linux：yum或源码安装
 		分支完成工作后 切换回master  git checkout master
 		然后把dev合并到master： git merge dev
 		删除dev ：git branch -d dev
+		
+	2、解决分支冲突
+		查看分支合并情况
+		git log --graph --pretty=oneline --abbrev-commit
+		删除冲突分支
+	3、分支策略
+		git merge --no-ff -m "merge with no-ff" dev
+		1、master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活
+		2、dev分支或dev分支的分支上团队开发
+		合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，
+		而fast forward合并就看不出来曾经做过合并
+	4、bug分支
+		git stash隐藏当前工作
+		git stash pop恢复同事把stash内容删除
+		git stash list查看stash内容
+		如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
+	5、多人协作：
+		
+	
+		
