@@ -66,6 +66,6 @@ linux：yum或源码安装
 		git stash list查看stash内容
 		如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
 	5、多人协作：
-		git checkout -b dev  penbaben/dev
-	
+		git checkout -b dev  origin/dev
+		git	
 		
