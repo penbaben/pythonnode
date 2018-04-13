@@ -90,7 +90,14 @@ linux：yum或源码安装
 	•自己拥有Fork后的仓库的读写权限；
 	•可以推送pull request给官方仓库来贡献代码。
 八、使用码云：
-	
+	操作更github一样
+九、自定义git
+	1、忽略特殊文件
+		创建 .gitignore文件--》把忽略的文件归类放入--》git add .gitignore--》git commit--》push
+		删除备份删除本地要忽略的文件 --》git add * ———》git commit————》恢复文件 -->git status查看状态
+		
+	2、配置别名：
+		git config --global alias 别名 命令
 
 
 
