@@ -97,9 +97,16 @@ linux：yum或源码安装
 		删除备份删除本地要忽略的文件 --》git add * ———》git commit————》恢复文件 -->git status查看状态
 		
 	2、配置别名：
-		git config --global alias 别名 命令
-
-
+		git config --global alias.别名 命令
+		--global 表示全局参数，指在这台电脑上用可以用，不加默认为只针对当前仓库
+		配置文件在.git/config
+		当前用户的配置文件在.git/logs
+十、搭建git服务器：
+	linux --》安装git--》创建git用户--》创建证书登录：用户公钥id_rsa.pub文件导入/home/git/.ssh/authorized_key
+	文件中，一行一个--》初始化git仓库：选定目录、在目录下执行git init --bare 仓库名.git--》禁止shell登录
+	/etc/passwd中git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell-->克隆远程仓库
+	
+	管理密钥：大团队用gitosis管理密钥
 
 
 
