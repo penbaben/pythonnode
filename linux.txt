@@ -1,0 +1,42 @@
+1、http虚拟机
+	修改httpd配置文件 http.conf：注释掉docmentroot
+	新建/conf.d/virtual.conf:
+	NameVirtualHost ip2:80
+	
+	<virtualHost ip1:80>
+		ServerName hello.magedu.com
+		DocmentRoot "/www/magedu.com"
+		Customlog "日志地址" 格式
+	</VirtualHost>
+	
+	<VirtualHost ip2:80>
+		ServerName www.a.org
+		DocmentRoot "/www/a.org"
+	</VirtualHost>
+	
+	<VirtualHost ip2:8080>  8080需要修改conf 监听8080 lisen 8080
+		ServerName www.b.org
+		DocmentRoot "/www/b.org"
+	</VirtualHost>
+	创建对应的文件 并在文件中创建主页index.html
+		ip addr add ip1 etho 0添加地址
+	httpd -t 检查语法	
+		
+	访问ip限制：
+	<Directroy "/www/a.org">
+		options none
+		AllowOverride none
+		Order deny, allow
+		Deny from ip   拒绝ip访问
+	</Directroy>
+	访问ip限制
+	<Directroy "/www/a.org">
+		options none
+		AllowOverride authconfig
+		AuthType basic
+		AuthName "name"
+		AuthUserFile "用户目录文件需要创建"
+		Require valid-user所有用户
+	</Directroy>
+	
+	htpasswd -c -m 用户目录文件 name
