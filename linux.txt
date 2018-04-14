@@ -6,7 +6,7 @@
 	<virtualHost ip1:80>
 		ServerName hello.magedu.com
 		DocmentRoot "/www/magedu.com"
-		Customlog "日志地址" 格式
+		Customlog "日志地址" 格式 (常见格式：main)
 	</VirtualHost>
 	
 	<VirtualHost ip2:80>
