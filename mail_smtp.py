@@ -2,9 +2,11 @@
 
 import smtplib
 from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
 
 HOST = "smtp.qq.com"  #邮件服务器
-SUBJECT = u" 官网流量数据报表" #主题
+SUBJECT = u" 官网业务服务质量周报" #主题
 TO = "penbaben_2010@163.com" 
 FROM = "285267803@qq.com"
 '''
@@ -16,14 +18,30 @@ BODY = "\r\n".join((  #组装sendmail方法的邮件主体内容，各段以“\
 		"",
 		text))
 '''
-msg = MIMEText("""
-	<table width="800" border="0" cellspacing="0" cellpadding="4">
-		<tr>
-			<td bgcolor="#CECFAD" height="20" style="font-size:14px">*官网数据 <a 
-	herf="monitor.domain.com">更多>></a></td>
+def addimg(src, imgid): #添加图片函数，参数1：图片路径， 参数2：图片
+	fp = open(src, 'rb')
+	msgImage = MIMEImage(fp.read())
+	fp.close()
+	msgImage.add_header('Content-ID', imgid)
+	return msgImage
+
+msg = MIMEMultipart('related') #创建MIMEImage对象，读取图片内容并作为参数的邮件体
+
+msgtext = MIMEText("""
+	<table width="600" border="0" cellspacing="0" cellpadding="4">
+		<tr bgcolor="#CECFAD" height="20" style="font-size:14px"> 
+			<td colspan=2>*官网数据 <a herf="monitor.domain.com">更多>></a></td>
 		</tr>
-		<tr>
-			<td bgcolor="#EFEBDE" height="100" style="font-size:13px">
+		<tr bgcolor="#EFEBDE" height="100" style="font-size:13px">
+			<td>
+				<img src="cid:io"></td><td>
+				<img src="cid:key_hit"></td>
+		</tr>
+		<tr gcolor="#EFEBDE" height="100" style="font-size:13px">
+			<td>
+				<img src="cid:men"></td><td>
+				<img src="cid:swap"></td>
+		</tr>
 			1)日访问量:<font color=red>152433</font> 访问次数：23651 页面浏览量：45123
 	点击数：545122 数据流量：504MB<br>
 			2)状态码信息<br>
@@ -37,6 +55,11 @@ msg = MIMEText("""
 			</td>
 		</tr>
 	</table>""","html","utf-8")	
+msg.attach(msgtext)
+msg.attach(addimg("img/bytes_io.png","io"))
+msg.attach(addimg("img/myisam_key_hit.png", "key_hit"))
+msg.attach(addimg("img/os_mem.png", "men"))
+msg.attach(addimg("img/os_swap.png", "swap"))
 msg['Subject'] = SUBJECT
 msg['From'] = 'FROM'
 msg['To'] = 'TO'
