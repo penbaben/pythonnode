@@ -6,7 +6,7 @@ import os, sys
 import time
 import pycurl
 
-URL = "http://www.baidu.com"
+URL = input("please input your url:")
 c = pycurl.Curl()
 c.setopt(pycurl.URL, URL)	#定义请求url常量
 c.setopt(pycurl.CONNECTTIMEOUT, 5)	#定义连接等待时间
