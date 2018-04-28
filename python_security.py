@@ -1,13 +1,13 @@
 #coding：utf-8
 #!/usr/bin/env python
 
-import timr, pyclamd
+import time, pyclamd
 from threading import Thread
 
 class Scan(Thread):
 	def __init__(self, IP, scan_type, file):
 		"""构造方法，参数初始化"""
-		Thread.__init__（self）
+		Thread.__init__(self)
 		self.IP = IP
 		self.scan_type = scan_type
 		self.file = file
@@ -24,9 +24,9 @@ class Scan(Thread):
 				if self.scan_type == "contscan_file":	#选择不同的烧苗模式
 					self.scanresult = "{0}\n".format(cd.contscan_file(self.file))
 				elif self.scan_type == "multiscan_file":
-					self.scanresult = "{0}\n".format(cd.multiscan_file(self.file)
+					self.scanresult = "{0}\n".format(cd.multiscan_file(self.file))
 				elif self.scan_type == "scan_file":
-					self.scanresult = "{0}\n".format(cd.scan_file(self.file)
+					self.scanresult = "{0}\n".format(cd.scan_file(self.file))
 				time.sleep(1)
 			else:
 				self.connstr = self.IP + "ping error, exit"
@@ -34,9 +34,9 @@ class Scan(Thread):
 		except Exception as e:
 			self.connstr = self.IP + " " + str(e)
 			
-IPs = ['192.168.1.21', '192.168.1.22'] 	#扫描主机列表
+IPs = ['192.168.220.100', '10.24.78.133'] 	#扫描主机列表
 scan_type = "multiscan_file"		#扫描模式
-scanfile = "data/www"
+scanfile = "/bin"
 i = 1
 threadnum = 2	#指定启动的进程数
 scanlist = []	#存储扫描Scan类线程对象列表
@@ -49,7 +49,7 @@ for ip in IPs:
 			task.start()	#启动进程
 			
 		for task in scanlist:
-			task.jion()		#等待所有子进程退出，并输出扫描结果
+			task.join()		#等待所有子进程退出，并输出扫描结果
 			print(task.connstr)		#打印服务器连接信息
 			print(task.scanresult)	#打印扫描结果
 		scanlist = []

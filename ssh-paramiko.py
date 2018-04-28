@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import paramiko	 
 '''
 远程登录，并循环执行shell命令
