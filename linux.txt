@@ -40,3 +40,45 @@
 	</Directroy>
 	
 	htpasswd -c -m 用户目录文件 name
+2、centos7安全
+	建立源，epel-release 
+		yum install -y epel-release （这是一个源）
+		yum -y update
+	安装clamav包
+		yum install clamav-server clamav-data clamav-update clamav-filesystem clamav clamav-scanner-systemd clamav-devel clamav-lib clamav-server-systemd -y
+	设定clamav守護進程
+		cp /usr/share/clamav/template/clamd.conf /etc/clamd.d/clamd.conf
+		sed -i -e 's/^Example/#Example/' /etc/clamd.d/clamd.conf(这是用命令行来为Example加#）
+		setsebool -P antivirus_can_scan_system 1
+	修改freshclam配置
+		cp /etc/freshclam.conf /etc/freshclam.conf.bak
+		sed -i -e 's/^Example/#Example/' /etc/freshclam.conf (这是用命令行来为Example加#）
+	启用每日自动更新病毒库
+		vim /etc/sysconfig/freshclam
+		FRESHCLAM_DELAY=disabled-warn # REMOVE ME改为#FRESHCLAM_DELAY=disabled-warn # REMOVE ME
+	配置扫描文件
+		sed -i -e 's/^Example/#Example/' /etc/clamd.d/scan.conf (这是用命令行来为Example加#）
+	建立“clam-freshclam.service”服务
+		vim /usr/lib/systemd/system/clam-freshclam.service
+			# Run the freshclam as daemon 
+			 [Unit] 
+			 Description = freshclam scanner 
+			 After = network.target 
+			 [Service] 
+			 Type = forking 
+			 ExecStart = /usr/bin/freshclam -d -c 4 
+			 Restart = on-failure 
+			 PrivateTmp = true 
+			 [Install] 
+			 WantedBy=multi-user.target
+	启动更新病毒库服务
+		systemctl enable clam-freshclam.service
+		systemctl start clam-freshclam.service
+		systemctl status clam-freshclam.service
+	手动更新病毒库：
+		freshclam
+		systemctl enable clamd@scan.service
+		systemctl start clamd@scan.service
+		systemctl status clamd@scan.service
+	扫描home，-r选项表示包含子目录
+		clamscan --infected --remove --recursive /home
